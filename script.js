@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const showtime = document.getElementById("showtime");
     const availableTickets = document.getElementById("available-tickets");
     const buyTicketButton = document.getElementById("buy-ticket");
+    const toastContainer = document.getElementById("toast-container");
   
     const API_URL = "http://localhost:3000/films";
   
@@ -49,6 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (ticketsAvailable > 0) {
           film.tickets_sold++;
           displayFilmDetails(film);
+          showToast("Ticket purchased successfully!");
+        } else {
+          showToast("No tickets available!", true);
         }
       };
     }
@@ -60,6 +64,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       filmElement.classList.add("selected");
       selectedFilmElement = filmElement;
+    }
+  
+    // Show a toast notification
+    function showToast(message, isError = false) {
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      if (isError) {
+        toast.style.backgroundColor = "red";
+      }
+      toast.textContent = message;
+  
+      toastContainer.appendChild(toast);
+  
+      // Remove the toast after the animation
+      toast.addEventListener("animationend", () => {
+        toast.remove();
+      });
     }
   });
   
