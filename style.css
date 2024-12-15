@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+  }
+  
+  #container {
+    display: flex;
+    width: 100%;
+  }
+  
+  aside {
+    width: 25%;
+    background-color: #f4f4f4;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  main {
+    width: 75%;
+    padding: 20px;
+  }
+  
+  #movie-details img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button.sold-out {
+    background-color: #ff0000;
+    cursor: not-allowed;
+  }
+  
