@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
     const API_URL = "http://localhost:3000/films";
   
+    let selectedFilmElement = null; // Track the currently selected film element
+  
     // Fetch and display all films
     fetch(API_URL)
       .then((response) => response.json())
@@ -17,12 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
           const li = document.createElement("li");
           li.textContent = film.title;
           li.className = "film item";
-          li.addEventListener("click", () => displayFilmDetails(film));
+          li.addEventListener("click", () => {
+            displayFilmDetails(film);
+            highlightSelectedFilm(li);
+          });
           filmsList.appendChild(li);
         });
   
         // Display the first film by default
-        displayFilmDetails(films[0]);
+        const firstFilm = filmsList.querySelector("li");
+        if (firstFilm) {
+          firstFilm.click(); // Trigger a click on the first film to set it as selected
+        }
       });
   
     // Display selected film details
@@ -43,6 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
           displayFilmDetails(film);
         }
       };
+    }
+  
+    // Highlight the selected film in the list
+    function highlightSelectedFilm(filmElement) {
+      if (selectedFilmElement) {
+        selectedFilmElement.classList.remove("selected");
+      }
+      filmElement.classList.add("selected");
+      selectedFilmElement = filmElement;
     }
   });
   
